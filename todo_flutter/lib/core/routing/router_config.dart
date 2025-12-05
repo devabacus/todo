@@ -6,7 +6,6 @@ import 'package:todo/features/configuration/presentation/routing/configuration_r
 import 'package:talker_flutter/talker_flutter.dart';
 
 import '../../features/auth/presentation/routing/auth_router_config.dart';
-import '../../features/bluetooth/presentation/routing/bluetooth_router_config.dart';
 import '../../features/configuration/presentation/routing/configuration_routes_constants.dart';
 import '../../features/home/presentation/routing/home_router_config.dart';
 import '../../features/home/presentation/routing/home_routes_constants.dart';
@@ -23,7 +22,7 @@ GoRouter appRouter(Ref ref) {
       ...getAuthRoutes(),
 			...getHomeRoutes(),
       ...getConfigurationRoutes(),
-      ...getBluetoothRoutes(),                
+      
     ]); 
 }   
 
