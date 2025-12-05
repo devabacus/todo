@@ -96,7 +96,6 @@ jobs:
           grep "image:" todo_server/k8s/deployment.yaml
           echo "Updated job image:"
           grep "image:" todo_server/k8s/job.yaml
-
       - name: Apply infrastructure manifests
         run: |
           kubectl apply -f todo_server/k8s/configmap.yaml
