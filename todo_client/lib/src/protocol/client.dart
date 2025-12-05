@@ -25,10 +25,9 @@ import 'package:todo_client/src/protocol/storage/uploaded_file.dart' as _i12;
 import 'package:todo_client/src/protocol/user/super_user_details.dart' as _i13;
 import 'package:todo_client/src/protocol/user/super_admin_dashboard.dart'
     as _i14;
-import 'package:todo_client/src/protocol/test_data.dart' as _i15;
-import 'package:todo_client/src/protocol/user/user_session_data.dart' as _i16;
-import 'package:todo_client/src/protocol/greeting.dart' as _i17;
-import 'protocol.dart' as _i18;
+import 'package:todo_client/src/protocol/user/user_session_data.dart' as _i15;
+import 'package:todo_client/src/protocol/greeting.dart' as _i16;
+import 'protocol.dart' as _i17;
 
 /// {@category Endpoint}
 class EndpointAdmin extends _i1.EndpointRef {
@@ -443,54 +442,14 @@ class EndpointSuperAdmin extends _i1.EndpointRef {
 }
 
 /// {@category Endpoint}
-class EndpointTestData extends _i1.EndpointRef {
-  EndpointTestData(_i1.EndpointCaller caller) : super(caller);
-
-  @override
-  String get name => 'testData';
-
-  /// Создает новую запись TestData в базе данных.
-  _i2.Future<_i15.TestData> createTestData(_i15.TestData testData) =>
-      caller.callServerEndpoint<_i15.TestData>(
-        'testData',
-        'createTestData',
-        {'testData': testData},
-      );
-
-  /// Возвращает список всех записей.
-  _i2.Future<List<_i15.TestData>> listTestDatas() =>
-      caller.callServerEndpoint<List<_i15.TestData>>(
-        'testData',
-        'listTestDatas',
-        {},
-      );
-
-  /// Обновляет существующую запись.
-  _i2.Future<_i15.TestData> updateTestData(_i15.TestData testData) =>
-      caller.callServerEndpoint<_i15.TestData>(
-        'testData',
-        'updateTestData',
-        {'testData': testData},
-      );
-
-  /// Удаляет запись.
-  _i2.Future<bool> deleteTestData(_i15.TestData testData) =>
-      caller.callServerEndpoint<bool>(
-        'testData',
-        'deleteTestData',
-        {'testData': testData},
-      );
-}
-
-/// {@category Endpoint}
 class EndpointUserManagement extends _i1.EndpointRef {
   EndpointUserManagement(_i1.EndpointCaller caller) : super(caller);
 
   @override
   String get name => 'userManagement';
 
-  _i2.Future<_i16.UserSessionData?> getMyUserContext() =>
-      caller.callServerEndpoint<_i16.UserSessionData?>(
+  _i2.Future<_i15.UserSessionData?> getMyUserContext() =>
+      caller.callServerEndpoint<_i15.UserSessionData?>(
         'userManagement',
         'getMyUserContext',
         {},
@@ -507,8 +466,8 @@ class EndpointGreeting extends _i1.EndpointRef {
   String get name => 'greeting';
 
   /// Returns a personalized greeting message: "Hello {name}".
-  _i2.Future<_i17.Greeting> hello(String name) =>
-      caller.callServerEndpoint<_i17.Greeting>(
+  _i2.Future<_i16.Greeting> hello(String name) =>
+      caller.callServerEndpoint<_i16.Greeting>(
         'greeting',
         'hello',
         {'name': name},
@@ -551,7 +510,7 @@ class Client extends _i1.ServerpodClientShared {
     bool? disconnectStreamsOnLostInternetConnection,
   }) : super(
          host,
-         _i18.Protocol(),
+         _i17.Protocol(),
          securityContext: securityContext,
          authenticationKeyManager: authenticationKeyManager,
          streamingConnectionTimeout: streamingConnectionTimeout,
@@ -565,7 +524,6 @@ class Client extends _i1.ServerpodClientShared {
     configuration = EndpointConfiguration(this);
     storage = EndpointStorage(this);
     superAdmin = EndpointSuperAdmin(this);
-    testData = EndpointTestData(this);
     userManagement = EndpointUserManagement(this);
     greeting = EndpointGreeting(this);
     modules = Modules(this);
@@ -579,8 +537,6 @@ class Client extends _i1.ServerpodClientShared {
 
   late final EndpointSuperAdmin superAdmin;
 
-  late final EndpointTestData testData;
-
   late final EndpointUserManagement userManagement;
 
   late final EndpointGreeting greeting;
@@ -593,7 +549,6 @@ class Client extends _i1.ServerpodClientShared {
     'configuration': configuration,
     'storage': storage,
     'superAdmin': superAdmin,
-    'testData': testData,
     'userManagement': userManagement,
     'greeting': greeting,
   };

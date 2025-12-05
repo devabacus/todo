@@ -15,14 +15,12 @@ import '../endpoints/admin_endpoint.dart' as _i2;
 import '../endpoints/configuration_endpoint.dart' as _i3;
 import '../endpoints/storage_endpoint.dart' as _i4;
 import '../endpoints/super_admin_endpoint.dart' as _i5;
-import '../endpoints/test_data_endpoint.dart' as _i6;
-import '../endpoints/user_manager_endpoint.dart' as _i7;
-import '../greeting_endpoint.dart' as _i8;
-import 'package:todo_server/src/generated/user/role.dart' as _i9;
-import 'package:todo_server/src/generated/configuration.dart' as _i10;
-import 'package:todo_server/src/generated/user/customer.dart' as _i11;
-import 'package:todo_server/src/generated/test_data.dart' as _i12;
-import 'package:serverpod_auth_server/serverpod_auth_server.dart' as _i13;
+import '../endpoints/user_manager_endpoint.dart' as _i6;
+import '../greeting_endpoint.dart' as _i7;
+import 'package:todo_server/src/generated/user/role.dart' as _i8;
+import 'package:todo_server/src/generated/configuration.dart' as _i9;
+import 'package:todo_server/src/generated/user/customer.dart' as _i10;
+import 'package:serverpod_auth_server/serverpod_auth_server.dart' as _i11;
 
 class Endpoints extends _i1.EndpointDispatch {
   @override
@@ -52,19 +50,13 @@ class Endpoints extends _i1.EndpointDispatch {
           'superAdmin',
           null,
         ),
-      'testData': _i6.TestDataEndpoint()
-        ..initialize(
-          server,
-          'testData',
-          null,
-        ),
-      'userManagement': _i7.UserManagementEndpoint()
+      'userManagement': _i6.UserManagementEndpoint()
         ..initialize(
           server,
           'userManagement',
           null,
         ),
-      'greeting': _i8.GreetingEndpoint()
+      'greeting': _i7.GreetingEndpoint()
         ..initialize(
           server,
           'greeting',
@@ -135,7 +127,7 @@ class Endpoints extends _i1.EndpointDispatch {
           params: {
             'role': _i1.ParameterDescription(
               name: 'role',
-              type: _i1.getType<_i9.Role>(),
+              type: _i1.getType<_i8.Role>(),
               nullable: false,
             ),
             'permissionIds': _i1.ParameterDescription(
@@ -328,7 +320,7 @@ class Endpoints extends _i1.EndpointDispatch {
           params: {
             'configuration': _i1.ParameterDescription(
               name: 'configuration',
-              type: _i1.getType<_i10.Configuration>(),
+              type: _i1.getType<_i9.Configuration>(),
               nullable: false,
             ),
           },
@@ -408,7 +400,7 @@ class Endpoints extends _i1.EndpointDispatch {
           params: {
             'configuration': _i1.ParameterDescription(
               name: 'configuration',
-              type: _i1.getType<_i10.Configuration>(),
+              type: _i1.getType<_i9.Configuration>(),
               nullable: false,
             ),
           },
@@ -576,7 +568,7 @@ class Endpoints extends _i1.EndpointDispatch {
           params: {
             'customer': _i1.ParameterDescription(
               name: 'customer',
-              type: _i1.getType<_i11.Customer>(),
+              type: _i1.getType<_i10.Customer>(),
               nullable: false,
             ),
           },
@@ -783,7 +775,7 @@ class Endpoints extends _i1.EndpointDispatch {
           params: {
             'role': _i1.ParameterDescription(
               name: 'role',
-              type: _i1.getType<_i9.Role>(),
+              type: _i1.getType<_i8.Role>(),
               nullable: false,
             ),
             'permissionIds': _i1.ParameterDescription(
@@ -943,79 +935,6 @@ class Endpoints extends _i1.EndpointDispatch {
         ),
       },
     );
-    connectors['testData'] = _i1.EndpointConnector(
-      name: 'testData',
-      endpoint: endpoints['testData']!,
-      methodConnectors: {
-        'createTestData': _i1.MethodConnector(
-          name: 'createTestData',
-          params: {
-            'testData': _i1.ParameterDescription(
-              name: 'testData',
-              type: _i1.getType<_i12.TestData>(),
-              nullable: false,
-            ),
-          },
-          call:
-              (
-                _i1.Session session,
-                Map<String, dynamic> params,
-              ) async => (endpoints['testData'] as _i6.TestDataEndpoint)
-                  .createTestData(
-                    session,
-                    params['testData'],
-                  ),
-        ),
-        'listTestDatas': _i1.MethodConnector(
-          name: 'listTestDatas',
-          params: {},
-          call:
-              (
-                _i1.Session session,
-                Map<String, dynamic> params,
-              ) async => (endpoints['testData'] as _i6.TestDataEndpoint)
-                  .listTestDatas(session),
-        ),
-        'updateTestData': _i1.MethodConnector(
-          name: 'updateTestData',
-          params: {
-            'testData': _i1.ParameterDescription(
-              name: 'testData',
-              type: _i1.getType<_i12.TestData>(),
-              nullable: false,
-            ),
-          },
-          call:
-              (
-                _i1.Session session,
-                Map<String, dynamic> params,
-              ) async => (endpoints['testData'] as _i6.TestDataEndpoint)
-                  .updateTestData(
-                    session,
-                    params['testData'],
-                  ),
-        ),
-        'deleteTestData': _i1.MethodConnector(
-          name: 'deleteTestData',
-          params: {
-            'testData': _i1.ParameterDescription(
-              name: 'testData',
-              type: _i1.getType<_i12.TestData>(),
-              nullable: false,
-            ),
-          },
-          call:
-              (
-                _i1.Session session,
-                Map<String, dynamic> params,
-              ) async => (endpoints['testData'] as _i6.TestDataEndpoint)
-                  .deleteTestData(
-                    session,
-                    params['testData'],
-                  ),
-        ),
-      },
-    );
     connectors['userManagement'] = _i1.EndpointConnector(
       name: 'userManagement',
       endpoint: endpoints['userManagement']!,
@@ -1028,7 +947,7 @@ class Endpoints extends _i1.EndpointDispatch {
                 _i1.Session session,
                 Map<String, dynamic> params,
               ) async =>
-                  (endpoints['userManagement'] as _i7.UserManagementEndpoint)
+                  (endpoints['userManagement'] as _i6.UserManagementEndpoint)
                       .getMyUserContext(session),
         ),
       },
@@ -1050,13 +969,13 @@ class Endpoints extends _i1.EndpointDispatch {
               (
                 _i1.Session session,
                 Map<String, dynamic> params,
-              ) async => (endpoints['greeting'] as _i8.GreetingEndpoint).hello(
+              ) async => (endpoints['greeting'] as _i7.GreetingEndpoint).hello(
                 session,
                 params['name'],
               ),
         ),
       },
     );
-    modules['serverpod_auth'] = _i13.Endpoints()..initializeEndpoints(server);
+    modules['serverpod_auth'] = _i11.Endpoints()..initializeEndpoints(server);
   }
 }

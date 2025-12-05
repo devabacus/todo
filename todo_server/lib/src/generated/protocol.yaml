@@ -42,11 +42,6 @@ superAdmin:
   - saDeleteUser:
   - saGetUserDetails:
   - saGetCustomer:
-testData:
-  - createTestData:
-  - listTestDatas:
-  - updateTestData:
-  - deleteTestData:
 userManagement:
   - getMyUserContext:
 greeting:
