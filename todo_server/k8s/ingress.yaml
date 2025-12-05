@@ -1,0 +1,46 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: todo-server-ingress
+  namespace: todo-app
+  annotations:
+    cert-manager.io/cluster-issuer: "letsencrypt-prod"
+spec:
+  ingressClassName: traefik
+  tls:
+    - hosts:
+        - api.my-points.ru
+        - web.my-points.ru
+        - insights.my-points.ru
+      secretName: serverpod-tls-todo
+  rules:
+    - host: "api.my-points.ru"
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: todo-server-service
+                port:
+                  name: api
+    - host: "web.my-points.ru"
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: todo-server-service
+                port:
+                  name: web
+    - host: "insights.my-points.ru"
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: todo-server-service
+                port:
+                  name: insights

@@ -1,0 +1,81 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: todo-server-deployment
+  namespace: todo-app
+  labels:
+    app: todo-server
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: todo-server
+  template:
+    metadata:
+      labels:
+        app: todo-server
+    spec:
+      imagePullSecrets:
+        - name: timeweb-registry-secret
+
+      containers:
+        - name: todo-server
+
+          image: ...registry.twcstorage.ru/todo-server:latest
+          command:
+            [
+              "/usr/local/bin/server",
+              "--mode",
+              "production",
+              "--role",
+              "monolith",
+            ]
+
+          imagePullPolicy: Always
+
+          ports:
+            - containerPort: 8080
+            - containerPort: 8081
+            - containerPort: 8082
+
+          envFrom:
+            - configMapRef:
+                name: serverpod-config-todo
+
+          env:
+            - name: SERVERPOD_DATABASE_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: serverpod-secrets-todo
+                  key: database-password
+            - name: SERVERPOD_REDIS_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: serverpod-secrets-todo
+                  key: redis-password
+            - name: SERVERPOD_SERVICE_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: serverpod-secrets-todo
+                  key: service-secret
+          resources:
+            requests:
+              memory: "256Mi"
+              cpu: "250m"
+            limits:
+              memory: "512Mi"
+              cpu: "500m"
+
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 8082
+            initialDelaySeconds: 20
+            periodSeconds: 15
+
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 8082
+            initialDelaySeconds: 60
+            periodSeconds: 30
