@@ -1,0 +1,30 @@
+# manifest: startProject
+project:
+  name: "todo"
+  
+server:
+  ip: "89.223.71.39"
+  http_port: "80:80"
+  https_port: "443:443"
+  domain: "my-points.ru"
+  subdomain:
+    api: "api36"
+    web: "web36"
+    insights: "insights36"
+  email: "frolprank@gmail.com"
+  
+database:
+  host: "192.168.0.7"
+  port: "5432"
+  name: "todo_db"
+  user: "todo_user"  
+  
+reddis:
+  host: "192.168.0.8"
+  port: "6379"
+  user: "default"
+  
+deployment:
+  organization: "devabacus"
+  ssh_user: "serverpod"
+
